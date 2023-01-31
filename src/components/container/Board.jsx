@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { TURN } from "../../models/turn.js";
-import { checkWinner } from "./../../models/checkWinner.js";
-import { checkEndGame } from './../../models/checkEndGame.js';
+import { checkWinner, checkEndGame } from "./../../models/checkGame.js";
 import WinnerModal from "./WinnerModal.jsx";
 import Game from "./Game.jsx";
 import confetti from "canvas-confetti";
@@ -47,11 +46,7 @@ const BoardContainer = () => {
         turnX={TURN.X}
         turnO={TURN.O}
       ></Game>
-      {
-        winner !== null && (
-          <WinnerModal winPlayer={winner} restartGame={resetGame}></WinnerModal>
-        )
-      }
+      <WinnerModal winPlayer={winner} restartGame={resetGame}></WinnerModal>
     </main>
   );
 };
