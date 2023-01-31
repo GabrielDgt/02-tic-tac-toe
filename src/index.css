@@ -132,6 +132,11 @@ body {
   cursor: pointer;
 }
 
+.winner .winnerBtn:hover {
+  background: #eee;
+  color: #222;
+}
+
 .winner .win {
   margin: 0 auto;
   width: fit-content;
