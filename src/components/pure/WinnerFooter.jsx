@@ -8,7 +8,7 @@ const Footer = ({ restartGame }) => {
 
   return (
     <footer>
-        <button onClick={handleClick}>Start Again</button>
+        <button className="winnerBtn" onClick={handleClick}>Start Again</button>
     </footer>
   )
 }

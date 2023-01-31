@@ -19,6 +19,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -37,11 +38,10 @@ body {
 
 .board h1 {
   color: #eee;
-  margin-bottom: 16px;
 }
 
-.board button {
-  padding: 8px 12px;
+.board .boardBtn {
+  padding: 10px 10px;
   margin: 25px;
   background: transparent;
   border: 2px solid #eee;
@@ -53,7 +53,7 @@ body {
   cursor: pointer;
 }
 
-.board button:hover {
+.board .boardBtn:hover {
   background: #eee;
   color: #222;
 }
@@ -67,10 +67,20 @@ body {
 .turn {
   display: flex;
   justify-content: center;
-  margin: 15px auto;
+  align-items: center;
+  margin: 25px auto;
   width: fit-content;
   position: relative;
   border-radius: 10px;
+}
+
+.turn .playerText {
+  display: grid;
+  align-items: center;
+  padding: 15px;
+  font-weight: bolder;
+  color: #eee;
+
 }
 
 .turn .square,
@@ -110,6 +120,18 @@ body {
   gap: 20px;
 }
 
+.winner .winnerBtn {
+  padding: 15px 10px;
+  background: transparent;
+  border: 2px solid #eee;
+  color: #eee;
+  width: 100px;
+  border-radius: 5px;
+  transition: 0.2s;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .winner .win {
   margin: 0 auto;
   width: fit-content;
@@ -123,7 +145,7 @@ body {
   width: 100px;
   height: 100px;
   border: 2px solid #eee;
-  border-radius: 5px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   cursor: pointer;
