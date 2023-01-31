@@ -1,68 +1,57 @@
 import React, { useState } from "react";
-import Square from "../pure/square.jsx";
-import { TURN } from "../../models/turn.enum.js";
-import { checkWinner } from './../../models/checkWinner.js';
+import { TURN } from "../../models/turn.js";
+import { checkWinner } from "./../../models/checkWinner.js";
+import { checkEndGame } from './../../models/checkEndGame.js';
 import WinnerModal from "./WinnerModal.jsx";
+import Game from "./Game.jsx";
+import confetti from "canvas-confetti";
 
 const BoardContainer = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [playerTurn, setPlayerTurn] = useState(TURN.X);
-  const [winner, setWinner] = useState(null)
+  const [winner, setWinner] = useState(null);
 
   const resetGame = () => {
-    setBoard(Array(9).fill(null))
-    setPlayerTurn(TURN.X)
-    setWinner(null)
-  }
+    setBoard(Array(9).fill(null));
+    setPlayerTurn(TURN.X);
+    setWinner(null);
+  };
 
   const updateBoard = (index) => {
-    if(board[index] || winner) return
+    if (board[index] || winner) return;
 
-    const newBoard = [...board]
-    newBoard[index] = playerTurn
-    setBoard(newBoard)
+    const newBoard = [...board];
+    newBoard[index] = playerTurn;
+    setBoard(newBoard);
 
-    const nextTurn = playerTurn === TURN.X ? TURN.O : TURN.X
-    setPlayerTurn(nextTurn)
+    const nextTurn = playerTurn === TURN.X ? TURN.O : TURN.X;
+    setPlayerTurn(nextTurn);
 
-    const newWinner = checkWinner(newBoard)
-    if(newWinner){
-      setWinner(newWinner)
+    const newWinner = checkWinner(newBoard);
+    if (newWinner) {
+      confetti()
+      setWinner(newWinner);
+    }else if (checkEndGame(newBoard)){
+      setWinner(false)
     }
-  }
+  };
 
   return (
     <main className="board">
       <h1>Tic-Tac Toe</h1>
-      <button onClick={resetGame}>Reset Game</button>
-      <section className="game">
-        {board.map((square, index) => {
-          return (
-            <Square 
-              key={index} 
-              index={index}
-              updateBoard={updateBoard}
-            >
-              {square}
-            </Square>
-          );
-        })}
-      </section>
-      <section className="turn">
-        <Square isSelected={playerTurn === TURN.X}>
-          {TURN.X}
-        </Square>
-        <Square isSelected={playerTurn === TURN.O}>
-          {TURN.O}
-        </Square>
-      </section>
-
+      <button className="boardBtn" onClick={resetGame}>Reset Game</button>
+      <Game
+        gameBoard={board}
+        updateBoard={updateBoard}
+        player={playerTurn}
+        turnX={TURN.X}
+        turnO={TURN.O}
+      ></Game>
       {
         winner !== null && (
           <WinnerModal winPlayer={winner} restartGame={resetGame}></WinnerModal>
         )
       }
-
     </main>
   );
 };
