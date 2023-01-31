@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { TURN } from "../../models/turn.js";
 import { checkWinner, checkEndGame } from "./../../models/checkGame.js";
 import WinnerModal from "./WinnerModal.jsx";
-import Game from "./Game.jsx";
+import GameBoard from "../pure/GameBoard.jsx";
+import PlayerTurn from '../pure/PlayerTurn.jsx';
 import confetti from "canvas-confetti";
 
 const BoardContainer = () => {
@@ -39,13 +40,15 @@ const BoardContainer = () => {
     <main className="board">
       <h1>Tic-Tac Toe</h1>
       <button className="boardBtn" onClick={resetGame}>Reset Game</button>
-      <Game
+      <GameBoard
         gameBoard={board}
         updateBoard={updateBoard}
+      ></GameBoard>
+      <PlayerTurn
         player={playerTurn}
         turnX={TURN.X}
         turnO={TURN.O}
-      ></Game>
+      ></PlayerTurn>
       <WinnerModal winPlayer={winner} restartGame={resetGame}></WinnerModal>
     </main>
   );
